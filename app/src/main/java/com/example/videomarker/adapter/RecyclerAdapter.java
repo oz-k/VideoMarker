@@ -67,10 +67,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
         public void setContent(String value) {
             textType.setText(value);
         }
-
-        /*asdad*/
-/*        hello*/
-/*        dasdasdsasad*/
     }
 
 
