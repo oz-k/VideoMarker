@@ -77,12 +77,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
         public String getTitle() {
             return textName.getText().toString();
         }
+
         public void setTitle(String value) {
             textName.setText(value);
         }
+
         public String getContent() {
             return textType.getText().toString();
         }
+
         public void setContent(String value) {
             textType.setText(value);
         }
@@ -94,26 +97,30 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
             Info.setOnMenuItemClickListener(onEditMenu);
             Delete.setOnMenuItemClickListener(onEditMenu);
         }
+
         private final MenuItem.OnMenuItemClickListener onEditMenu = new MenuItem.OnMenuItemClickListener() {
 
-        @Override
-        public boolean onMenuItemClick(MenuItem item) {
-            switch (item.getItemId()) {
-                case 1001:
-                    Intent intent = new Intent;
-                case 1002:
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                    builder.setTitle("삭제");
-                    builder.setMessage("삭제하시겠습니까?");
-                    builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(context, "삭제되었습니다", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    builder.setNegativeButton("취소", null);
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case 1001:
+                        Intent intent = new Intent;
+                    case 1002:
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        builder.setTitle("삭제");
+                        builder.setMessage("삭제하시겠습니까?");
+                        builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(context, "삭제되었습니다", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        builder.setNegativeButton("취소", null);
+                }
+                return true;
             }
-            return true;
-        }
-    };
+
+        };
+    }
 }
+
