@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">VideoMarker</string>
+    <string name="title_video">Video</string>
+    <string name="title_folder">Folder</string>
+    <string name="title_bookmark">BookMark</string>
+    <string name="title_my">My</string>
+
+    <string name="tab_text_1">Video</string>
+    <string name="tab_text_2">Folder</string>
+    <string name="tab_text_3">BookMark</string>
+    <string name="tab_text_4">My</string>
+</resources>
