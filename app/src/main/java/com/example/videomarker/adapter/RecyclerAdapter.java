@@ -119,7 +119,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
                 }
                 return true;
             }
-
         };
     }
 }
