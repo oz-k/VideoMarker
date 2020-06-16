@@ -26,7 +26,7 @@ import java.util.List;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder> {
 
     private List<Data> datas;
-
+    //Todo: 깃허브
     public RecyclerAdapter(List<Data> datas) {
         this.datas = datas;
     }
