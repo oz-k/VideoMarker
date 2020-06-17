@@ -27,6 +27,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".activity.SettingActivity"></activity>
+        <activity android:name=".activity.InfoActivity"></activity>
 
     </application>
 

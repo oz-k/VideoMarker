@@ -30,7 +30,7 @@ public class VideoFragment extends Fragment {
         Context context = v.getContext();
 
         List<Data> datas = Loader.getData(getActivity());
-        RecyclerAdapter adapter = new RecyclerAdapter(datas);
+        RecyclerAdapter adapter = new RecyclerAdapter(datas, context);
         RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
