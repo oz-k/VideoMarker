@@ -1,4 +1,4 @@
-package com.example.videomarker.data;
+package com.example.videomarker.data.util;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 
-import com.example.videomarker.ui.main.video.VideoFragment;
+import com.example.videomarker.data.entities.Data;
 
 import java.util.ArrayList;
 import java.util.List;
