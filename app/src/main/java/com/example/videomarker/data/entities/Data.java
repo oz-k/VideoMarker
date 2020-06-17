@@ -2,24 +2,24 @@ package com.example.videomarker.data.entities;
 
 public class Data {
 
-    private String title;
-    private String content;
+    private String Name;
+    private String Dur;
     private int resId;
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return Name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        Name = name;
     }
 
-    public String getContent() {
-        return content;
+    public String getDur() {
+        return Dur;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setDur(String dur) {
+        Dur = dur;
     }
 
     public int getResId() {

@@ -32,9 +32,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<Holder> {
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         Data data = datas.get(position);
-        holder.setId(String.valueOf(data.getResId()));
-        holder.setTitle(data.getTitle());
-        holder.setContent(data.getContent());
+        //holder.setId(String.valueOf(data.getResId()));
+        holder.setName(data.getName());
+        holder.setDur(data.getDur());
     }
 
     @Override

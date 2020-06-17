@@ -22,7 +22,7 @@ public class Loader {
         String projections[] = {
                 MediaStore.Video.Media._ID,
                 MediaStore.Video.Media.TITLE,
-                MediaStore.Video.Media.MIME_TYPE
+                MediaStore.Video.Media.DURATION
         };
         Cursor c = resolver.query(uri, projections, null, null, null);
 
@@ -35,13 +35,32 @@ public class Loader {
                 String name = c.getString(index);
 
                 index = c.getColumnIndex(projections[2]);
-                String type = c.getString(index);
+                String duration = c.getString(index);
+
+                //Todo: 밀리세컨값을 그냥 뒤에 3자리를 짤라버리고 코딩함. 나중에 오류생기면 TimeUnit으로 바꿀것
+                //Todo: 밀리세컨 > 시분초, Byte > MegaByte : presenter로 나중에 옮겨야됨(재사용가능한 코드로)
+                int millis = Integer.parseInt(duration.substring(0,duration.length()-3));
+
+                int h, m, s;
+                String hour, min, sec;
+                m = millis / 60;
+                h = m / 60;
+                s = millis % 60;
+                m = m % 60;
+
+                hour = Integer.toString(h) + ":";
+                if(m<10) { min = "0" + Integer.toString(m) + ":"; }
+                else{ min = Integer.toString(m) + ":"; }
+                if(s<10) { sec = "0" + Integer.toString(s); }
+                else{ sec = Integer.toString(s); }
+
+                String dur = (hour + min + sec);
 
 
                 Data data = new Data();
-                data.setResId(id);
-                data.setTitle(name);
-                data.setContent(type);
+                //data.setResId(id);
+                data.setName(name);
+                data.setDur(dur);
 
                 datas.add(data);
             }

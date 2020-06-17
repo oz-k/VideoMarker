@@ -10,35 +10,35 @@ import com.example.videomarker.R;
 public class Holder extends RecyclerView.ViewHolder {
 
     private TextView textName;
-    private TextView textType;
-    private TextView textId;
+    private TextView textDur;
+    private TextView textTag;
+    //private TextView textId;
 
     public Holder(View itemView) {
         super(itemView);
-        textName = (TextView) itemView.findViewById(R.id.textView1);
-        textType = (TextView) itemView.findViewById(R.id.textView2);
-        textId = (TextView) itemView.findViewById(R.id.textView3);
+        textName = (TextView) itemView.findViewById(R.id.textName);
+        textDur = (TextView) itemView.findViewById(R.id.textDur);
+        //textId = (TextView) itemView.findViewById(R.id.textView3);
 
     }
 
-    public String getId() {
+    /*public String getId() {
         return textId.getText().toString();
     }
-
     public void setId(String value) {
         textId.setText(value);
-    }
+    }*/
 
-    public String getTitle() {
+    public String getName() {
         return textName.getText().toString();
     }
-    public void setTitle(String value) {
+    public void setName(String value) {
         textName.setText(value);
     }
-    public String getContent() {
-        return textType.getText().toString();
+    public String getDur() {
+        return textDur.getText().toString();
     }
-    public void setContent(String value) {
-        textType.setText(value);
+    public void setDur(String value) {
+        textDur.setText(value);
     }
 };
