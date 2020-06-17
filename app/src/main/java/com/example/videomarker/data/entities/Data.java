@@ -1,4 +1,4 @@
-package com.example.videomarker.data;
+package com.example.videomarker.data.entities;
 
 public class Data {
 

@@ -1,29 +1,22 @@
 package com.example.videomarker.ui.main.video;
 
-import android.content.ContentResolver;
 import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.videomarker.R;
 import com.example.videomarker.adapter.RecyclerAdapter;
-import com.example.videomarker.data.Data;
-import com.example.videomarker.data.Loader;
+import com.example.videomarker.data.entities.Data;
+import com.example.videomarker.data.util.Loader;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class VideoFragment extends Fragment {
