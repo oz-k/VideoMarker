@@ -5,13 +5,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
 import android.provider.MediaStore;
+import android.widget.Toast;
+import android.provider.MediaStore;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.videomarker.R;
 import com.example.videomarker.data.util.FileUtil;
 
 public class InfoActivity extends AppCompatActivity {
+
+
+    private String id;
+    private Context context;
+
+
 
     private int id;
     private Context context;
@@ -23,16 +33,16 @@ public class InfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_info);
 
         Intent intent = getIntent();
-        id = intent.getExtras().getInt("ID");
-        Uri singleUri = ContentUris.withAppendedId(MediaStore.Video.Media.getContentUri("external"),id);
-        FileUtil.getPath(context, singleUri);
-        getUriToPath();
+
+        id = intent.getExtras().getString("ID");
+        Toast.makeText(getApplicationContext(), id, Toast.LENGTH_SHORT).show();
+        //Uri singleUri = ContentUris.withAppendedId(MediaStore.Video.Media.getContentUri("external"),id);
+        //FileUtil.getPath(context, singleUri);
+        //getUriToPath();
     }
 
     public void getUriToPath() {
-        final Uri uri = data.getData();
-        String path = FileUtil.getPath(context, uri);
-
-
+        //final Uri uri = data.getData();
+        //String path = FileUtil.getPath(context, uri);
     }
 }

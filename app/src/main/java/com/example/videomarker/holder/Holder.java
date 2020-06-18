@@ -34,14 +34,14 @@ public class Holder extends RecyclerView.ViewHolder{
         textId = (TextView) itemView.findViewById(R.id.textView3);
         btnMore = (ImageButton) itemView.findViewById(R.id.btnMore);
     }
-
-    public String getId() {
-        return textId.getText().toString();
-    }
-    public void setId(String value) {
-        textId.setText(value);
-    }
-
+  
+//    public String getId() {
+//        return textId.getText().toString();
+//    }
+//    public void setId(String value) {
+//        textId.setText(value);
+//    }
+    
     public String getName() {
         return textName.getText().toString();
     }

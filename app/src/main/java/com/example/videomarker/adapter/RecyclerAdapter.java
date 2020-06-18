@@ -28,7 +28,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<Holder> implements Cli
 
     private List<Data> datas;
     public final Context context;
-    private int id;
+
+    private String id;
+
 
     public RecyclerAdapter(List<Data> datas, Context context) {
         this.datas = datas;
@@ -49,18 +51,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<Holder> implements Cli
         holder.setId(String.valueOf(data.getResId()));
         holder.setName(data.getName());
         holder.setDur(data.getDur());
-        holder.btnMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onItemLongClick(v,position);
-            }
-        });
         holder.btnMore.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 return false;
             }
         });
+
     }
 
     @Override
@@ -68,11 +65,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<Holder> implements Cli
         return datas.size();
     }
 
+
     @Override
     public void onItemLongClick(View v, int position) {
         List<Data> datas = ContentLoader.getContent(context);
 
-        id = datas.get(position).getResId();
+        id = String.valueOf(datas.get(position).getResId());
+
         PopupMenu p = new PopupMenu(context, v);
         MenuInflater inflater = p.getMenuInflater();
         Menu menu = p.getMenu();
