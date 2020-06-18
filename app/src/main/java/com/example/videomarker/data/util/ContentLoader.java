@@ -11,15 +11,23 @@ import androidx.annotation.Nullable;
 
 import com.example.videomarker.data.entities.Data;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ContentLoader {
 
-    public final List<Data> datas = new ArrayList<>();
+//    public static final List<Data> datas = new ArrayList<>();
+//    private static int id;
+//    private static String name;
+//    private static String dur;
+//    private static int size;
+//    private static String mime;
+//    private static String added;
 
-    public List<Data> getContent(Context context) {
 
+    public static List<Data> getContent(Context context) {
+        List<Data> datas = new ArrayList<>();
         ContentResolver resolver = context.getContentResolver(); //데이터를 가져오는 커넥터
 
         Uri uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
@@ -65,9 +73,9 @@ public class ContentLoader {
 
 
                 index = c.getColumnIndex(projections[3]);
-                String bsize = c.getString(index);
-                int btomb = Integer.parseInt(bsize);
-                String size = Integer.toString(btomb/1024/1024)+"MB";
+                String bytesize = c.getString(index);
+                int size = Integer.parseInt(bytesize);
+
 
                 index = c.getColumnIndex(projections[4]);
                 String mime = c.getString(index);
@@ -75,12 +83,16 @@ public class ContentLoader {
                 index = c.getColumnIndex(projections[5]);
                 String added = c.getString(index);
 
-
                 Data data = new Data();
-                //data.setResId(id);
+
+                data.setResId(id);
                 data.setName(name);
                 data.setDur(dur);
-                data.setSize(size);
+
+                ContentLoader reSize = new ContentLoader();
+                String changedSize = reSize.getReadableFileSize(size);
+                data.setSize(changedSize);
+
                 data.setMime(mime);
                 data.setAdded(added);
 
@@ -90,8 +102,55 @@ public class ContentLoader {
         c.close();
         return datas;
     }
-    public static List<Data> Loader(Context context) {
-        List<Data> datas = new ArrayList<>();
-        return datas;
+//    public static List<Data> getData(Context context) {
+//        List<Data> datas = new ArrayList<>();
+//
+//        Data data = new Data();
+//
+//        data.setName(name);
+//        data.setDur(dur);
+//
+//        datas.add(data);
+//        return datas;
+//    }
+
+    //    public static List<Data> getInfoData(Context context) {
+//        List<Data> datas = new ArrayList<>();
+//
+//        Data data = new Data();
+//
+//        data.setResId(id);
+//        data.setName(name);
+//        data.setDur(dur);
+//        data.setSize(size);
+//        data.setMime(mime);
+//        data.setAdded(added);
+//
+//        datas.add(data);
+//        return datas;
+//    }
+    public String getReadableFileSize(int size) {
+        final int BYTES_IN_KILOBYTES = 1024;
+        final DecimalFormat dec = new DecimalFormat("###.#");
+        final String KILOBYTES = "KB";
+        final String MEGABYTES = "MB";
+        final String GIGABYTES = "GB";
+        float fileSize = 0;
+        String suffix = KILOBYTES;
+
+        if(size > BYTES_IN_KILOBYTES) {
+            fileSize = size / BYTES_IN_KILOBYTES;
+            if(fileSize > BYTES_IN_KILOBYTES) {
+                fileSize = fileSize / BYTES_IN_KILOBYTES;
+                if (fileSize > BYTES_IN_KILOBYTES) {
+                    fileSize = fileSize / BYTES_IN_KILOBYTES;
+                    suffix = GIGABYTES;
+                } else {
+                    suffix = MEGABYTES;
+                }
+            }
+        }
+        return String.valueOf(dec.format(fileSize) + suffix);
     }
+
 }
