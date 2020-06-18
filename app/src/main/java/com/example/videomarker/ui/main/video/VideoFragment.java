@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.videomarker.R;
 import com.example.videomarker.adapter.RecyclerAdapter;
 import com.example.videomarker.data.entities.Data;
-import com.example.videomarker.data.util.Loader;
+import com.example.videomarker.data.util.ContentLoader;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class VideoFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_video, container, false);
         Context context = v.getContext();
 
-        List<Data> datas = Loader.getData(getActivity());
+        List<Data> datas = ContentLoader.getContent(getActivity());
         RecyclerAdapter adapter = new RecyclerAdapter(datas, context);
         RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
         recyclerView.setAdapter(adapter);

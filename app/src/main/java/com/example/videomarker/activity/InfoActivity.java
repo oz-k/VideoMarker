@@ -1,29 +1,31 @@
 package com.example.videomarker.activity;
 
+import android.content.ContentUris;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-<<<<<<< Updated upstream
-import android.view.View;
-import android.widget.Button;
-=======
+
 import android.provider.MediaStore;
 import android.widget.Toast;
->>>>>>> Stashed changes
+import android.provider.MediaStore;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.videomarker.R;
+import com.example.videomarker.data.util.FileUtil;
 
 public class InfoActivity extends AppCompatActivity {
-<<<<<<< Updated upstream
-    private String fileUri;
-    private Button close;
-=======
+
 
     private String id;
     private Context context;
 
->>>>>>> Stashed changes
+
+
+    private int id;
+    private Context context;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +33,7 @@ public class InfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_info);
 
         Intent intent = getIntent();
-<<<<<<< Updated upstream
-=======
+
         id = intent.getExtras().getString("ID");
         Toast.makeText(getApplicationContext(), id, Toast.LENGTH_SHORT).show();
         //Uri singleUri = ContentUris.withAppendedId(MediaStore.Video.Media.getContentUri("external"),id);
@@ -43,8 +44,5 @@ public class InfoActivity extends AppCompatActivity {
     public void getUriToPath() {
         //final Uri uri = data.getData();
         //String path = FileUtil.getPath(context, uri);
-
->>>>>>> Stashed changes
-
     }
 }

@@ -11,16 +11,24 @@ import androidx.annotation.Nullable;
 
 import com.example.videomarker.data.entities.Data;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class ContentLoader {
 
-    public final List<Data> datas = new ArrayList<>();
+//    public static final List<Data> datas = new ArrayList<>();
+//    private static int id;
+//    private static String name;
+//    private static String dur;
+//    private static int size;
+//    private static String mime;
+//    private static String added;
 
-    public List<Data> getContent(Context context) {
 
+    public static List<Data> getContent(Context context) {
+        List<Data> datas = new ArrayList<>();
         ContentResolver resolver = context.getContentResolver(); //데이터를 가져오는 커넥터
         ContentLoader re = new ContentLoader();
 
@@ -48,14 +56,8 @@ public class ContentLoader {
                 long millis = Long.parseLong(millisDur);
 
                 index = c.getColumnIndex(projections[3]);
-<<<<<<< Updated upstream
-                String bsize = c.getString(index);
-                int btomb = Integer.parseInt(bsize);
-                String size = Integer.toString(btomb/1024/1024)+"MB";
-=======
                 String bytesize = c.getString(index);
                 int size = Integer.parseInt(bytesize);
->>>>>>> Stashed changes
 
                 index = c.getColumnIndex(projections[4]);
                 String mime = c.getString(index);
@@ -63,14 +65,10 @@ public class ContentLoader {
                 index = c.getColumnIndex(projections[5]);
                 String added = c.getString(index);
 
-
                 Data data = new Data();
-                //data.setResId(id);
+
+                data.setResId(id);
                 data.setName(name);
-<<<<<<< Updated upstream
-                data.setDur(dur);
-                data.setSize(size);
-=======
 
                 String changedTime = re.getReadableDuration(millis);
                 data.setDur(changedTime);
@@ -78,7 +76,6 @@ public class ContentLoader {
                 String changedSize = re.getReadableFileSize(size);
                 data.setSize(changedSize);
 
->>>>>>> Stashed changes
                 data.setMime(mime);
                 data.setAdded(added);
 
@@ -88,12 +85,25 @@ public class ContentLoader {
         c.close();
         return datas;
     }
-<<<<<<< Updated upstream
     public static List<Data> Loader(Context context) {
         List<Data> datas = new ArrayList<>();
         return datas;
     }
-=======
+
+
+    public String getReadableDuration(long millis) {
+        //TODO: 60분 미만이어도 00:00:00 로 표시되는 현상
+        String dur = String.format("%02d:%02d:%02d",
+                TimeUnit.MILLISECONDS.toHours(millis),
+                TimeUnit.MILLISECONDS.toMinutes(millis) -
+                        TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), // The change is in this line
+                TimeUnit.MILLISECONDS.toSeconds(millis) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+        return dur;
+    }
+
+
+
 //    public static List<Data> getData(Context context) {
 //        List<Data> datas = new ArrayList<>();
 //
@@ -130,9 +140,9 @@ public class ContentLoader {
         float fileSize = 0;
         String suffix = KILOBYTES;
 
-        if (size > BYTES_IN_KILOBYTES) {
+        if(size > BYTES_IN_KILOBYTES) {
             fileSize = size / BYTES_IN_KILOBYTES;
-            if (fileSize > BYTES_IN_KILOBYTES) {
+            if(fileSize > BYTES_IN_KILOBYTES) {
                 fileSize = fileSize / BYTES_IN_KILOBYTES;
                 if (fileSize > BYTES_IN_KILOBYTES) {
                     fileSize = fileSize / BYTES_IN_KILOBYTES;
@@ -144,17 +154,4 @@ public class ContentLoader {
         }
         return String.valueOf(dec.format(fileSize) + suffix);
     }
-
-    public String getReadableDuration(long millis) {
-        //TODO: 60분 미만이어도 00:00:00 로 표시되는 현상
-        String dur = String.format("%02d:%02d:%02d",
-                TimeUnit.MILLISECONDS.toHours(millis),
-                TimeUnit.MILLISECONDS.toMinutes(millis) -
-                        TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), // The change is in this line
-                TimeUnit.MILLISECONDS.toSeconds(millis) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-        return dur;
-    }
-
->>>>>>> Stashed changes
 }

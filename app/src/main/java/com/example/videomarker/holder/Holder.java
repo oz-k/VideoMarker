@@ -23,7 +23,7 @@ public class Holder extends RecyclerView.ViewHolder{
     private TextView textName;
     private TextView textDur;
     private TextView textTag;
-    //private TextView textId;
+    private TextView textId;
     public final ImageButton btnMore;
 
 
@@ -31,26 +31,17 @@ public class Holder extends RecyclerView.ViewHolder{
         super(itemView);
         textName = (TextView) itemView.findViewById(R.id.textName);
         textDur = (TextView) itemView.findViewById(R.id.textDur);
-        //textId = (TextView) itemView.findViewById(R.id.textView3);
+        textId = (TextView) itemView.findViewById(R.id.textView3);
         btnMore = (ImageButton) itemView.findViewById(R.id.btnMore);
     }
-
-<<<<<<< Updated upstream
-    /*public String getId() {
-        return textId.getText().toString();
-    }
-    public void setId(String value) {
-        textId.setText(value);
-    }*/
-=======
+  
 //    public String getId() {
 //        return textId.getText().toString();
 //    }
 //    public void setId(String value) {
 //        textId.setText(value);
 //    }
->>>>>>> Stashed changes
-
+    
     public String getName() {
         return textName.getText().toString();
     }
@@ -63,4 +54,4 @@ public class Holder extends RecyclerView.ViewHolder{
     public void setDur(String value) {
         textDur.setText(value);
     }
-};
+}
