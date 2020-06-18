@@ -21,12 +21,6 @@ public class InfoActivity extends AppCompatActivity {
     private String id;
     private Context context;
 
-
-
-    private int id;
-    private Context context;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +33,8 @@ public class InfoActivity extends AppCompatActivity {
         //Uri singleUri = ContentUris.withAppendedId(MediaStore.Video.Media.getContentUri("external"),id);
         //FileUtil.getPath(context, singleUri);
         //getUriToPath();
+        //TODO: ID로 MediaStore 검색 > 상세정보
+        //TODO: TITLE로 FILE에서 검색 > RENAME, DELETE기능 구현 (일단 여기에 만들고 나중에 FileUtil로 넘어가기)
     }
 
     public void getUriToPath() {
