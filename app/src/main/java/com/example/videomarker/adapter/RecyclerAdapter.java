@@ -2,7 +2,6 @@ package com.example.videomarker.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.icu.text.IDNA;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,7 +18,6 @@ import com.example.videomarker.R;
 import com.example.videomarker.activity.InfoActivity;
 import com.example.videomarker.data.entities.Data;
 import com.example.videomarker.data.util.ContentLoader;
-import com.example.videomarker.data.util.FileUtil;
 import com.example.videomarker.holder.Holder;
 
 import java.util.List;
@@ -48,13 +46,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<Holder> implements Cli
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, final int position) {
         Data data = datas.get(position);
-        holder.setId(String.valueOf(data.getResId()));
+        //holder.setId(String.valueOf(data.getResId()));
         holder.setName(data.getName());
         holder.setDur(data.getDur());
-        holder.btnMore.setOnLongClickListener(new View.OnLongClickListener() {
+        holder.btnMore.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View view) {
-                return false;
+            public void onClick(View view) {
+                onItemClick(view, position);
             }
         });
 
@@ -67,7 +65,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<Holder> implements Cli
 
 
     @Override
-    public void onItemLongClick(View v, int position) {
+    public void onItemClick(View v, int position) {
         List<Data> datas = ContentLoader.getContent(context);
 
         id = String.valueOf(datas.get(position).getResId());
