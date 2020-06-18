@@ -8,7 +8,6 @@ public class Data {
     private String Size;
     private String Mime;
     private String Added;
-    private String Data;
 
 
     public String getName() {
@@ -57,13 +56,5 @@ public class Data {
 
     public void setAdded(String added) {
         Added = added;
-    }
-
-    public String getData() {
-        return Data;
-    }
-
-    public void setData(String data) {
-        Data = data;
     }
 }

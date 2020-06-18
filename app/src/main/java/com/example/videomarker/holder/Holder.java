@@ -35,12 +35,21 @@ public class Holder extends RecyclerView.ViewHolder{
         btnMore = (ImageButton) itemView.findViewById(R.id.btnMore);
     }
 
+<<<<<<< Updated upstream
     /*public String getId() {
         return textId.getText().toString();
     }
     public void setId(String value) {
         textId.setText(value);
     }*/
+=======
+//    public String getId() {
+//        return textId.getText().toString();
+//    }
+//    public void setId(String value) {
+//        textId.setText(value);
+//    }
+>>>>>>> Stashed changes
 
     public String getName() {
         return textName.getText().toString();

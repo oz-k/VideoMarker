@@ -24,6 +24,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<Holder> {
 
     private List<Data> datas;
     public final Context context;
+<<<<<<< Updated upstream
+=======
+    private String id;
+>>>>>>> Stashed changes
 
     public RecyclerAdapter(List<Data> datas, Context context) {
         this.datas = datas;
@@ -46,10 +50,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<Holder> {
         holder.btnMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+<<<<<<< Updated upstream
                 showPopup(v, context);
             }
         });
 
+=======
+                onItemLongClick(v,position);
+            }
+        });
+>>>>>>> Stashed changes
     }
 
     @Override
@@ -57,7 +67,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<Holder> {
         return datas.size();
     }
 
+<<<<<<< Updated upstream
     private void showPopup(final View v, final Context context){
+=======
+    @Override
+    public void onItemLongClick(View v, int position) {
+        List<Data> datas = ContentLoader.getContent(context);
+
+        id = String.valueOf(datas.get(position).getResId());
+>>>>>>> Stashed changes
         PopupMenu p = new PopupMenu(context, v);
         MenuInflater inflater = p.getMenuInflater();
         Menu menu = p.getMenu();
