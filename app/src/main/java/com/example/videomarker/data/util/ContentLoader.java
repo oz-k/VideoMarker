@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 
 import com.example.videomarker.data.entities.Data;
 
+import java.nio.file.spi.FileSystemProvider;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -149,4 +150,13 @@ public class ContentLoader {
         }
         return String.valueOf(dec.format(fileSize) + suffix);
     }
+
+    public static void deleteContent(Context context, Uri contentUri, String id) {
+        String mSelection = MediaStore.Video.Media._ID + "=?";
+        String[] mSelectionsArgs = new String[] {id};
+
+        ContentResolver contentResolver = context.getContentResolver();
+        contentResolver.delete(contentUri, mSelection, mSelectionsArgs);
+    }
+
 }

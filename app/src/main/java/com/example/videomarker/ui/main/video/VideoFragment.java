@@ -34,7 +34,7 @@ public class VideoFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+        adapter.notifyDataSetChanged();
         return v;
     }
 }

@@ -1,7 +1,10 @@
 package com.example.videomarker.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.videomarker.Listener.ClickListener;
@@ -26,8 +30,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<Holder> implements Cli
 
     private List<Data> datas;
     public final Context context;
-
+    private Uri contentUri;
     private String id;
+    private String name;
 
 
     public RecyclerAdapter(List<Data> datas, Context context) {
@@ -69,7 +74,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<Holder> implements Cli
         List<Data> datas = ContentLoader.getContent(context);
 
         id = String.valueOf(datas.get(position).getResId());
-
+        contentUri = Uri.withAppendedPath(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, id.toString());
+        name = datas.get(position).getName();
         PopupMenu p = new PopupMenu(context, v);
         MenuInflater inflater = p.getMenuInflater();
         Menu menu = p.getMenu();
@@ -78,7 +84,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<Holder> implements Cli
         p.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.pPlay:
                         break;
                     case R.id.pInfo:
@@ -89,7 +95,25 @@ public class RecyclerAdapter extends RecyclerView.Adapter<Holder> implements Cli
                     case R.id.pAddpl:
                         break;
                     case R.id.pDel:
-
+                        androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setTitle("삭제");
+                        builder.setMessage(name + "파일을 삭제하시겠습니까?");
+                        builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                ContentLoader.deleteContent(context, contentUri, id);
+                                notifyDataSetChanged();
+                                dialogInterface.dismiss();
+                            }
+                        });
+                        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
                         break;
                 }
                 return false;

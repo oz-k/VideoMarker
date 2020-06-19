@@ -51,36 +51,44 @@ public class InfoActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), contentUri.toString(), Toast.LENGTH_SHORT).show();
 
         final EditText et = new EditText(InfoActivity.this);
-        Button button = (Button) findViewById(R.id.reName);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button reNameBtn = (Button) findViewById(R.id.reName);
+        reNameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(InfoActivity.this);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(InfoActivity.this);
                 builder.setView(et);
                 builder.setTitle("파일 명 변경");
                 builder.setMessage("파일 명을 변경하시겠습니까?");
                 et.setHint(name);
-                /*builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        ContentValues updateValue = new ContentValues();
-                        int rowsUpdated = 0;
-
-                        String selection = MediaStore.Video.Media.TITLE;
+                        ContentValues updateValue = new ContentValues(); //업데이트 할 값을 저장하는 객체 생성
                         Uri uri = contentUri;
+                        String proj[] = {
+                            MediaStore.Video.Media.TITLE
+                        };
+                        String selection = MediaStore.Video.Media.TITLE; //무엇을 업데이트 할지 설정
 
-                        updateValue.put(MediaStore.Video.Media.TITLE);
-                        rowsUpdated = getContentResolver().update(uri, updateValue, );
-
+                        //업데이트 할 값, 업데이트
+                        updateValue.put(MediaStore.Video.Media.TITLE, et.getText().toString());
+                        getContentResolver().update(uri, updateValue, selection, null);
+                        getContentResolver().query(uri, proj, null,null,null);
+                        getVideoInfo();
+                        dialogInterface.dismiss();
                     }
-                });*/
+                });
+                builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
 
             }
         });
-
-
-
-
 
 
         getVideoInfo();
@@ -90,11 +98,11 @@ public class InfoActivity extends AppCompatActivity {
     public void getVideoInfo() {
 
         TextView tv1 = (TextView) findViewById(R.id.fName);
-        TextView tv2 = (TextView) findViewById(R.id.fName);
-        TextView tv3 = (TextView) findViewById(R.id.fName);
-        TextView tv4 = (TextView) findViewById(R.id.fName);
-        TextView tv5 = (TextView) findViewById(R.id.fName);
-        TextView tv6 = (TextView) findViewById(R.id.fName);
+        TextView tv2 = (TextView) findViewById(R.id.fDuration);
+        TextView tv3 = (TextView) findViewById(R.id.fSize);
+        TextView tv4 = (TextView) findViewById(R.id.fMime);
+        TextView tv5 = (TextView) findViewById(R.id.fAdded);
+        TextView tv6 = (TextView) findViewById(R.id.fPath);
 
         ContentLoader re = new ContentLoader();
         ContentResolver resolver = getApplicationContext().getContentResolver();
