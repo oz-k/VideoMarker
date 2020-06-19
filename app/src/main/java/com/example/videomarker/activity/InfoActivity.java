@@ -32,8 +32,9 @@ public class InfoActivity extends AppCompatActivity {
 
 
     private String id;
-    public Uri contentUri;
+    private Uri contentUri;
     private String name;
+    private String updateValue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,12 +44,9 @@ public class InfoActivity extends AppCompatActivity {
 
         id = intent.getExtras().getString("ID");
 
-
-        //TODO: ID로 MediaStore 검색 > 상세정보
-        //TODO: TITLE로 FILE에서 검색 > RENAME, DELETE기능 구현 (일단 여기에 만들고 나중에 FileUtil로 넘어가기)
         //Id를 Uri로 변환하는 코드
         contentUri = Uri.withAppendedPath(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, id.toString());
-        Toast.makeText(getApplicationContext(), contentUri.toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), name, Toast.LENGTH_SHORT).show();
 
         final EditText et = new EditText(InfoActivity.this);
         Button reNameBtn = (Button) findViewById(R.id.reName);
@@ -60,21 +58,15 @@ public class InfoActivity extends AppCompatActivity {
                 builder.setTitle("파일 명 변경");
                 builder.setMessage("파일 명을 변경하시겠습니까?");
                 et.setHint(name);
+                //TODO:새로운 이름값이 전달안됨
+                updateValue = et.getText().toString();
                 builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        ContentValues updateValue = new ContentValues(); //업데이트 할 값을 저장하는 객체 생성
-                        Uri uri = contentUri;
-                        String proj[] = {
-                            MediaStore.Video.Media.TITLE
-                        };
-                        String selection = MediaStore.Video.Media.TITLE; //무엇을 업데이트 할지 설정
-
-                        //업데이트 할 값, 업데이트
-                        updateValue.put(MediaStore.Video.Media.TITLE, et.getText().toString());
-                        getContentResolver().update(uri, updateValue, selection, null);
-                        getContentResolver().query(uri, proj, null,null,null);
-                        getVideoInfo();
+                        ContentLoader cl = new ContentLoader();
+                        Toast.makeText(getApplicationContext(),updateValue, Toast.LENGTH_SHORT).show();
+                        cl.modifyContent(getApplicationContext(), updateValue, contentUri, id);
+                        cl.getContent(getApplicationContext());
                         dialogInterface.dismiss();
                     }
                 });
@@ -157,20 +149,5 @@ public class InfoActivity extends AppCompatActivity {
             }
         }
         c.close();
-    }
-
-
-    //TODO: 이 메소드는 android api 29 부터 permission을 요구함 https://codechacha.com/ko/android-mediastore-remove-media-files/ 참고
-    private void deleteContent(Context context, Uri contentUri) {
-        List<Data> datas = ContentLoader.getContent(context);
-        ContentResolver cr = context.getContentResolver();
-        cr.delete(contentUri, null, null);
-        RecyclerAdapter adapter = new RecyclerAdapter(datas, context);
-        adapter.notifyDataSetChanged();
-    }
-
-    public void getUriToPath() {
-        //final Uri uri = data.getData();
-        //String path = FileUtil.getPath(context, uri);
     }
 }

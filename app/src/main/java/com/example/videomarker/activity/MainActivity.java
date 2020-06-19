@@ -121,3 +121,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
+
+//TODO: MediaStore변경에 따라 RecyclerView가 변화하도록 해야함.
+// RecyclerAdapter안에 OnClick메서드, popup, 여기저기 흩어진 AlertBuilder 정리 필요.
+// > Listener로 옮기던지 해야할듯.
+// onBindViewHolder는 들어오는 데이터 값에 따라서 다른 결과값을 출력하도록 변경 필요.
+// ContentLoader에서 들고있는데이터를 요청에 따라 일부분만 전달하도록 변경 필요.

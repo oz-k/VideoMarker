@@ -101,8 +101,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<Holder> implements Cli
                         builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                ContentLoader.deleteContent(context, contentUri, id);
-                                notifyDataSetChanged();
+                                ContentLoader cl = new ContentLoader();
+                                cl.deleteContent(context, contentUri, id);
+                                cl.getContent(context);
                                 dialogInterface.dismiss();
                             }
                         });
