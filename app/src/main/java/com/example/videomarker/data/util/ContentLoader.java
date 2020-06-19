@@ -26,7 +26,6 @@ public class ContentLoader {
 //    private static String mime;
 //    private static String added;
 
-
     public static List<Data> getContent(Context context) {
         List<Data> datas = new ArrayList<>();
         ContentResolver resolver = context.getContentResolver(); //데이터를 가져오는 커넥터
@@ -83,10 +82,6 @@ public class ContentLoader {
             }
         }
         c.close();
-        return datas;
-    }
-    public static List<Data> Loader(Context context) {
-        List<Data> datas = new ArrayList<>();
         return datas;
     }
 
