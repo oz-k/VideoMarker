@@ -132,7 +132,7 @@ public class ContentLoader {
         contentResolver.delete(contentUri, mSelection, mSelectionsArgs);
     }
 
-    public void modifyContent(Context context, String updateValue, Uri contentUri, String id) {
+    public String modifyContent(Context context, String updateValue, Uri contentUri, String id) {
 
         String mSelection = MediaStore.Video.Media._ID + "=?";
         String[] mSelectionsArgs = new String[] {id};
@@ -141,6 +141,8 @@ public class ContentLoader {
 
         ContentResolver contentResolver = context.getContentResolver();
         contentResolver.update(contentUri, Value, mSelection, mSelectionsArgs);
+        //TODO: 값은 잘 전달되고 로직 문제있음. Rename 사용해볼것. 또는 https://stackoverflow.com/questions/55314476/how-to-rename-a-file-in-android-knowing-only-its-media-content-uri 참고(DocumentContract)
+        return Value.toString();
     }
 
 }

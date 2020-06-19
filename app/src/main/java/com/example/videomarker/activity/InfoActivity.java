@@ -35,6 +35,7 @@ public class InfoActivity extends AppCompatActivity {
     private Uri contentUri;
     private String name;
     private String updateValue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,19 +54,19 @@ public class InfoActivity extends AppCompatActivity {
         reNameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(InfoActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(InfoActivity.this);
                 builder.setView(et);
                 builder.setTitle("파일 명 변경");
                 builder.setMessage("파일 명을 변경하시겠습니까?");
                 et.setHint(name);
                 //TODO:새로운 이름값이 전달안됨
-                updateValue = et.getText().toString();
+                //updateValue = et.getText().toString();
                 builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         ContentLoader cl = new ContentLoader();
-                        Toast.makeText(getApplicationContext(),updateValue, Toast.LENGTH_SHORT).show();
-                        cl.modifyContent(getApplicationContext(), updateValue, contentUri, id);
+                        String result = cl.modifyContent(getApplicationContext(), et.getText().toString(), contentUri, id);
+                        Toast.makeText(getApplicationContext(),result, Toast.LENGTH_SHORT).show();
                         cl.getContent(getApplicationContext());
                         dialogInterface.dismiss();
                     }
@@ -81,8 +82,6 @@ public class InfoActivity extends AppCompatActivity {
 
             }
         });
-
-
         getVideoInfo();
     }
 
@@ -110,7 +109,7 @@ public class InfoActivity extends AppCompatActivity {
                 MediaStore.Video.Media.DATA
         };
 
-        Cursor c = resolver.query(uri, projections, null,null,null);
+        Cursor c = resolver.query(uri, projections, null, null, null);
 
         if (c != null) {
             while (c.moveToNext()) {
