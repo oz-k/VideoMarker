@@ -28,6 +28,8 @@
         </activity>
         <activity android:name=".activity.SettingActivity"></activity>
         <activity android:name=".activity.InfoActivity"></activity>
+        <activity android:name=".activity.PrivacyActivity"></activity>
+        <activity android:name=".activity.LicenseActivity"></activity>
 
     </application>
 
