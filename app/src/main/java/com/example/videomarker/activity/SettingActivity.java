@@ -36,3 +36,5 @@ public class SettingActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+
+//Todo: Activity 종료 메서드 만들기
